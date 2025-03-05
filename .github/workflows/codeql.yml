@@ -22,6 +22,10 @@ on:
 jobs:
   detect_changes:
     runs-on: ubuntu-latest
+    permissions:
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
     outputs:
       matrix: ${{ steps.detect_changes.outputs.matrix }}
       matrix_no_changes: ${{ steps.detect_changes.outputs.matrix_no_changes }}
