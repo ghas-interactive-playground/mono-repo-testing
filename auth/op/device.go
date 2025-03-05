@@ -13,6 +13,7 @@ import (
 	"github.com/zitadel/oidc/v2/pkg/op"
 )
 
+// comment
 type deviceAuthenticate interface {
 	CheckUsernamePasswordSimple(username, password string) error
 	op.DeviceAuthorizationStorage
