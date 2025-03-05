@@ -39,7 +39,7 @@ jobs:
            CHANGES=$(echo "$DIFF" | jq -c '.changes')
            NO_CHANGES=$(echo "$DIFF" | jq -c '.no_changes')
          
-           else
+          else
             # For push events, compare with the previous commit
             DIFF=$(git diff --name-only HEAD^ HEAD | awk -f process.awk)
             CHANGES=$(echo "$DIFF" | jq -c '.changes')
@@ -94,8 +94,13 @@ jobs:
       needs: [detect_changes, analyze]
       runs-on: ubuntu-latest
       permissions:
+        # required for all workflows
         security-events: write
+        # required to fetch internal or private CodeQL packs
+        packages: read
+        # only required for workflows in private repositories
         actions: read
+        contents: read
       strategy:
         fail-fast: true
         matrix: 
