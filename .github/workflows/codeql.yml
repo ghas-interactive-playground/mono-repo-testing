@@ -41,7 +41,7 @@ jobs:
          
            else
             # For push events, compare with the previous commit
-            DIFF=$(git diff --name-only HEAD^ HEAD | awk -f process.awk | jq -c '.changes')
+            DIFF=$(git diff --name-only HEAD^ HEAD | awk -f process.awk)
             CHANGES=$(echo "$DIFF" | jq -c '.changes')
             NO_CHANGES=$(echo "$DIFF" | jq -c '.no_changes')
           fi
@@ -51,7 +51,7 @@ jobs:
           echo "matrix_no_changes=$NO_CHANGES" >> $GITHUB_OUTPUT
     
           # Print the changes for debugging
-          echo "Changes found: $CHANGES"
+          echo "Changes found: $CHANGES" 
           echo "No changes found: $NO_CHANGES"
 
   analyze:
