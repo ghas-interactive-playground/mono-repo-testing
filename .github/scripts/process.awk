@@ -21,15 +21,17 @@ BEGIN {
 
 {
   # skip directory if already procesed
-  if (!dirs[$1]) {
-    # record directory where files have changed, and programming language for codeql analysis 
-    dirs[$1] = sprintf( \
+  if ( $1 in cfg_for_dir) {
+    if (!dirs[$1]) {
+      # record directory where files have changed, and programming language for codeql analysis 
+      dirs[$1] = sprintf( \
       "{\"directory\": \"%s\", \"language\": \"%s\", \"build_mode\": \"%s\"}", \
       $1, \
       cfg_for_dir[$1]["lang"], \
       cfg_for_dir[$1]["build_mode"] \
     )
   }
+}
 
   # record directory where no files have changed
   for (key in cfg_for_dir) {
